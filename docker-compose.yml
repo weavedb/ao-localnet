@@ -32,6 +32,8 @@ services:
       start_interval: 1s
     ports:
       - 4000:80
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     volumes:
       - ./services/arlocal/data:/app/db
 
@@ -46,6 +48,8 @@ services:
         target: /usr/local/apache2/htdocs/assets/assets/config/dev.json
     ports:
       - 4001:80
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
 
   mu:
     build: ./services/mu
@@ -55,7 +59,8 @@ services:
     env_file: ./services/mu/.env
     ports:
       - 4002:80
-
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
   su:
     depends_on:
       arlocal:
@@ -69,7 +74,8 @@ services:
     env_file: ./services/su/.env
     ports:
       - 4003:80
-
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
   su-database:
     image: postgres
     environment:
@@ -91,6 +97,8 @@ services:
     env_file: ./services/cu/.env
     ports:
       - 4004:80
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
 
   turbo:
     profiles: ["turbo"]
@@ -104,6 +112,8 @@ services:
     env_file: ./services/turbo/.env
     ports:
       - 4005:80
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
 
   turbo-database:
     profiles: ["turbo"]
@@ -130,6 +140,8 @@ services:
         - ARWEAVE_GATEWAY_URL=http://localhost:4000
     ports:
       - 4006:80
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
 
   bundler:
     depends_on:
@@ -142,3 +154,5 @@ services:
     env_file: ./services/bundler/.env
     ports:
       - 4007:80
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
