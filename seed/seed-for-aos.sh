@@ -3,9 +3,9 @@
 cd $(dirname $0)
 
 # Mint/grant tokens
-cd  node ../wallets/printWalletAddresses.mjs | while read -r line; do
-	address=$(echo $line | awk '{print $1}')
-	curl -q http://localhost:4000/mint/$address/1000000000000
+node ../wallets/printWalletAddresses.mjs | while read -r line; do
+    address=$(echo $line | awk '{print $1}')
+    curl -q http://localhost:4000/mint/$address/1000000000000
 done
 
 #########################################################################################
