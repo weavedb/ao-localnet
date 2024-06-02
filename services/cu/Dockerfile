@@ -13,7 +13,7 @@ WORKDIR /usr/app
 RUN sed -i '/heapdump/d' package.json
 RUN sed -i '/heapdump/d' src/app.js
 
-RUN apk add --update --no-cache python3 && ln -sf /usr/bin/python3 /usr/bin/python
+RUN apk add --update --no-cache python3 make g++ && ln -sf /usr/bin/python3 /usr/bin/python
 RUN npm install --ignore-engines --omit=dev
 
 EXPOSE 80
