@@ -10,13 +10,15 @@ FROM rust:1.75.0 AS builder
 WORKDIR /build
 COPY --from=downloader /download/ao/servers/su .
 
-RUN apt update && apt install --yes libpq5 llvm-dev libclang-dev clang librocksdb-dev
+RUN apt update && apt install --yes llvm-dev libclang-dev clang librocksdb-dev
 
 RUN cargo build --release
 
 FROM rust:slim
 WORKDIR /app
 COPY --from=builder /build/target/release/su .
+
+RUN apt update && apt install --yes libpq5
 
 EXPOSE 80
 CMD ["./su", "su", "80"]
