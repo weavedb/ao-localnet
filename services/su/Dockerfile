@@ -1,4 +1,4 @@
-FROM node:alpine as downloader
+FROM node:22-alpine as downloader
 ARG SU_VERSION=main
 
 RUN apk add git
